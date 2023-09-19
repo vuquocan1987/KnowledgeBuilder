@@ -1,0 +1,12 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: login-monitor
+  labels:
+    release: prometheus
+spec:
+  selector:
+    matchLabels:
+      app: login-service
+  endpoints:
+  - port: login-port

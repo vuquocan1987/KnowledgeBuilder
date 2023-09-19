@@ -1,0 +1,130 @@
+openapi: 3.0.0
+info:
+  title: Login API
+  version: 1.0.0
+servers:
+- url: /
+paths:
+  /login:
+    post:
+      operationId: login_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/_login_post_request'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/_login_post_200_response'
+          description: Login successful
+      summary: Authenticate a user
+      x-openapi-router-controller: openapi_server.controllers.default_controller
+  /logout:
+    post:
+      operationId: logout_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/_login_post_200_response'
+      responses:
+        "200":
+          description: Logout successful
+      summary: Logout a user
+      x-openapi-router-controller: openapi_server.controllers.default_controller
+  /password-change:
+    post:
+      operationId: password_change_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/_password_change_post_request'
+      responses:
+        "200":
+          description: Password changed successfully
+      summary: Change password
+      x-openapi-router-controller: openapi_server.controllers.default_controller
+  /password-reset:
+    post:
+      operationId: password_reset_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/_password_reset_post_request'
+      responses:
+        "200":
+          description: Password reset email sent
+      summary: Request password reset
+      x-openapi-router-controller: openapi_server.controllers.default_controller
+  /register:
+    post:
+      operationId: register_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/_register_post_request'
+      responses:
+        "200":
+          description: User registered successfully
+      summary: Register a new user
+      x-openapi-router-controller: openapi_server.controllers.default_controller
+components:
+  schemas:
+    _password_reset_post_request:
+      properties:
+        email:
+          title: email
+          type: string
+      title: _password_reset_post_request
+      type: object
+    _register_post_request:
+      properties:
+        username:
+          title: username
+          type: string
+        password:
+          title: password
+          type: string
+        email:
+          title: email
+          type: string
+      title: _register_post_request
+      type: object
+    _login_post_request:
+      properties:
+        username:
+          title: username
+          type: string
+        password:
+          title: password
+          type: string
+      title: _login_post_request
+      type: object
+    _login_post_200_response:
+      example:
+        token: token
+      properties:
+        token:
+          title: token
+          type: string
+      title: _login_post_200_response
+      type: object
+    _password_change_post_request:
+      properties:
+        oldPassword:
+          title: oldPassword
+          type: string
+        newPassword:
+          title: newPassword
+          type: string
+        token:
+          title: token
+          type: string
+      title: _password_change_post_request
+      type: object

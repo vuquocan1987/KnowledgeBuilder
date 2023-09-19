@@ -1,0 +1,47 @@
+openapi: 3.0.0
+info:
+  version: "1.0.0"
+  title: "Question Browsing Service"
+  description: "API for browsing questions after JWT authentication."
+
+paths:
+  /questions:
+    get:
+      summary: "Get list of questions"
+      description: "Retrieve a list of questions available to the authenticated user."
+      security:
+        - BearerAuth: []
+      responses:
+        '200':
+          description: "List of questions successfully retrieved."
+          content:
+            application/json:
+              schema:
+                type: "array"
+                items:
+                  $ref: "#/components/schemas/Question"
+        '401':
+          description: "Unauthorized. JWT token is missing or invalid."
+        '500':
+          description: "Internal server error."
+
+components:
+  securitySchemes:
+    BearerAuth:
+      type: "http"
+      scheme: "bearer"
+      bearerFormat: "JWT"
+
+  schemas:
+    Question:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+          description: "Unique identifier for the question."
+        content:
+          type: "string"
+          description: "The content of the question."
+      required:
+        - id
+        - content
