@@ -1,0 +1,8 @@
+MicroServices:
+  - Name: "login"
+    Description: |
+      This is a login service that handles user authentication and authorization, and password reset. It is a RESTful API service. The 
+      service use JWT for authentication and authorization
+  # - Name: "browsing"
+  #   Description: |
+  #     This is a browsing service that handles browsing of products. It is a RESTful API service. The service use JWT for authentication

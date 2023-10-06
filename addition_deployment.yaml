@@ -1,0 +1,20 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: addition-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: addition-service
+  template:
+    metadata:
+      labels:
+        app: addition-service
+    spec:
+      containers:
+      - name: addition-service
+        image: your_image_repository/addition-service:latest
+        ports:
+        - containerPort: 8081
